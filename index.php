@@ -1,5 +1,5 @@
 <?php
-include "login/config.php";
+include"login/config.php";
 	session_start();
 $user_sucess=0;
 	if(isset($_POST["submit"]))
@@ -17,7 +17,8 @@ $user_sucess=0;
 
      $_SESSION["u_type"]=$row["u_type"];
 		   if($row["u_type"]==1)
-		   header('location:unit_home.php');
+		   header('location:home1.html');
+		 
 				$user_sucess=1;
 			}
 			
@@ -25,42 +26,47 @@ $user_sucess=0;
 	}
 ?>
 
-<?php include "incloude/header.php" ?>
-<body dir="rtl">
-   <div class="container my-5">
-      <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
-         <div class="toast-body text-white"></div>
-      </div> <div class="row justify-content-center">
-     <div class="col-md-6">
-        <div class="card">
-           <div class="card-body">
-              <h3 class="card-title text-center mb-4">تسجيل الدخول</h3>
-              <?php
-              if(isset($error)){
-                 foreach($error as $error){
-                    echo '<div class="alert alert-danger">'.$error.'</div>';
-                 };
-              };
-              ?>
-              <form action="" method="post">
-                 <div class="form-group">
-                    <label for="username">اسم المستخدم</label>
-                    <input type="text" name="username" id="username" class="form-control" required>
-                 </div>
-                 <div class="form-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" name="password" id="password" class="form-control" required>
-                 </div>
-                 <div class="form-group text-center">
-                    <button type="submit" name="submit" class="btn btn-primary">تسجيل الدخول</button>
-                 </div>
-              </form>
-           </div>
-        </div>
-     </div>
-  </div>
-            </body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>login form</title>
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+	    <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body text-white">
+      </div>
+    </div>
+<body style="direction: rtl;">
+   
+<div class="form-container rtl">
+
+   <form action="" method="post">
+      <h3>تسجيل الدخول</h3>
+      <?php
+      if(isset($error)){
+         foreach($error as $error){
+            echo '<span class="error-msg">'.$error.'</span>';
+         };
+      };
+      ?>
+      <input type="text" name="username" required placeholder="ادخل اسم المستخدم">
+      <input type="password" name="password" required placeholder="ادخل كلمة المرور">
+      <input type="submit" name="submit" value="تسجيل الدخول" class="form-btn">
+     
+   </form>
+
+</div>
+
+</body>
 </html>
+
 
 <script src="js/jquery-3.6.4.min.js"></script>
 <script>
