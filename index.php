@@ -25,17 +25,7 @@ $user_sucess=0;
 	}
 ?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login Form</title>
-   <!-- Bootstrap CSS file link -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
+<?php include "incloude/header.php" ?>
 <body dir="rtl">
    <div class="container my-5">
       <div class="toast" id="alert_toast" role="alert" aria-live="assertive" aria-atomic="true">
