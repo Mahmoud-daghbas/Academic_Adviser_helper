@@ -84,6 +84,7 @@ include 'login/config.php';
 
 	<script>
 		$(document).ready(function() {
+			updateStates();
 			// Save selected students and display them in a table
             $('#saveStudentsBtn').click(function() {
 // Get selected program and advisor
@@ -147,8 +148,7 @@ $('#showModelStudent').click(function() {
 						dataType:'json',
 						success:function(data)
 						{
-
-							
+							$("#studentsTable tbody").html('');
 							var tr='';
 						
 							$.each(data,function(i,item){
@@ -163,31 +163,35 @@ $('#showModelStudent').click(function() {
 	});
 	$('#studentsModal').modal('show');
 });
-$("select[name='Id_Dept']").change(function(){
-	var Id_Dept=$(this).val();
-
-	$.ajax({
-		
-						url:'academic_advisor/ajax_function.php',
-						type:'POST',
-						data:{select_advisor:true,Id_Dept:Id_Dept},
-						dataType:'json',
-						success:function(data)
-						{
-							var option='';
-						
-							$.each(data,function(i,item){
-								option+=' <option value="'+item.Id_Advisor+'">'+item.Name_Advisor+'</option>';
-				
-							});
-							$("select[name='advisor']").append(option);
-
-						}
-				
-	});
+$("#Id_Dept").change(function(){
+updateStates()
 });
 
+
 });
+function updateStates() {
+	var Id_Dept=$("#Id_Dept").val();
+
+$.ajax({
+	
+					url:'academic_advisor/ajax_function.php',
+					type:'POST',
+					data:{select_advisor:true,Id_Dept:Id_Dept},
+					dataType:'json',
+					success:function(data)
+					{
+						var option='';
+					
+						$.each(data,function(i,item){
+							option+=' <option value="'+item.Id_Advisor+'">'+item.Name_Advisor+'</option>';
+			
+						});
+						$("#advisor").html(option);
+
+					}
+			
+});
+}
 </script>
 
 </body> </html>
