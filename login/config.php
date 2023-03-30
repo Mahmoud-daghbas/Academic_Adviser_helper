@@ -1,5 +1,5 @@
 <?php
 
-$conn = mysqli_connect('localhost','root','','academic_advising_db');
+$conn = mysqli_connect('localhost','root','','academic_advisor_helper');
 
 ?>

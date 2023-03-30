@@ -107,7 +107,7 @@ function add_student2($s_name=NULL,$s_gender=NULL,$birth_date,$phone_no=NULL,$s_
 function select_student_in_dept_assigment($Id_Dept)
 {
   global $conn;
-   $students =$conn->query("SELECT `Id_Student`, `Name_Student` FROM `table_students` WHERE Id_Dept='$Id_Dept'");
+   $students =$conn->query("SELECT  DISTINCT s.`Id_Student`, `Name_Student`,l.Id_Advisor FROM `table_students` s LEFT join table_links l on l.Id_Student=s.Id_Student  WHERE Id_Dept='$Id_Dept' order by Id_Student asc");
 $data=array();
    while($row=$students->fetch_assoc()){
 $data[]=$row;

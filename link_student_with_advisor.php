@@ -21,22 +21,20 @@ include 'login/config.php';
 				<?php  }?>
 			</select>
 	  </div>
-		<div class="form-group">
-			<label for="advisor"> اختر المشرف </label>
-			<select class="form-control"  name="advisor"id="advisor">
-             
-			</select>
-		</div>
+		
 		<button type="button" class="btn btn-primary"  id="showModelStudent" >
-			اختر الطلاب
+			انزال بيانات الطلاب
+		</button>
+		<button type="button" class="btn btn-primary"  id="saveStudentsBtn" >
+			خفظ
 		</button>
 		<hr>
 		<table id="selectedStudentsTable" class="table" style="display:none;">
 			<thead>
 				<tr>
-					<th> القسم </th>
-					<th> اسم المرشد الاكاديمي </th>
-					<th> اسم الطلاب </th>
+					<th> رقم الطالب</th>
+					<th> اسم الطالب </th>
+					<th> المشرف الاكاديمي </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,30 +43,7 @@ include 'login/config.php';
 		</table>
 	</div>
 	<!-- Students Modal -->
-	<div class="modal fade" id="studentsModal" tabindex="-1" role="dialog" aria-labelledby="studentsModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="studentsModalLabel"> اختر الطلاب </h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<table id="studentsTable" class="table">
 
-						<tbody>
-						
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal"> الغاء </button>
-					<button type="button" class="btn btn-primary" id="saveStudentsBtn"> حفظ </button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Include jQuery -->
 	<script src="js/js/jquery-3.6.4.min.js"></script>
 
@@ -81,56 +56,58 @@ include 'login/config.php';
 
 		 }
 	</script>
-
 	<script>
 		$(document).ready(function() {
-			updateStates();
+		
+			$('#selectedStudentsTable').show();
 			// Save selected students and display them in a table
             $('#saveStudentsBtn').click(function() {
 // Get selected program and advisor
-var Id_Dept = $('#Id_Dept').val();
-var advisor = $('#advisor').val();
-var Dept_name = $('#Id_Dept option:selected').text();
-var advisor_name = $('#advisor option:selected').text();
+
 // Get selected students and their names
-var selectedStudents = [];
+var selectedadvisor = [];
 var selecteStudentsname=[];
-$('.studentCheckbox:checked').each(function() {
-selectedStudents.push($(this).val());
-selecteStudentsname.push($(this).closest('tr').find('td:first-child').text());
+$('#selectedStudentsTable tbody tr').each(function() {
+    // Get the selected value of the select element in the gender column
+   //
+ 
+	selectedadvisor.push($(this).find('td:eq(2) select').val());
+selecteStudentsname.push($(this).closest('tr').find('td:nth-child(1)').text());
+
 //selectedStudents.add($(this).closest('tr').find('td:first-child').text());
 });
 // Create table rows for selected students
 var rows = '';
 var insert='';
-for (var i = 0; i < selectedStudents.length; i++) {
-rows += '<tr>';
-rows += '<td value="'+Id_Dept+'">' + Dept_name + '</td>';
-rows += '<td value="'+advisor+'">' + advisor_name + '</td>';
-rows += '<td value="'+selectedStudents[i]+'">' +selecteStudentsname[i]+ '</td>';
+var j=0;
+for (var i = 0; i < selectedadvisor.length; i++) {
 
-rows += '</tr>';
+if(selectedadvisor[i]!=" ")
+{
 
-if(i!=0)
+	if(j!=0)
 insert+=',';
-insert+='(NULL,"'+selectedStudents[i]+'","'+advisor+'",sysdate(),"'+1+'")';
+insert+='("'+selecteStudentsname[i]+'","'+selectedadvisor[i]+'",sysdate(),"'+1+'")';
+j++;
 }
+}
+
 
 // Add table rows to the selected students table
 
 
 					$.ajax({
-						url:'date_link/ajax_function.php',
+						url:'data_link/ajax_function.php',
 						type:'POST',
 						data:{add_data_link:true,data:insert},
 						success:function(data){
-						
+					alert("تمت عملية الاضافة بنجاح");
 						}});
 
-						$('#selectedStudentsTable tbody').html(rows);
+					
 				
 // Show the selected students table
-$('#selectedStudentsTable').show();
+
 // Hide the students modal
 $('#studentsModal').modal('hide');
 });
@@ -148,20 +125,25 @@ $('#showModelStudent').click(function() {
 						dataType:'json',
 						success:function(data)
 						{
-							$("#studentsTable tbody").html('');
-							var tr='';
-						
-							$.each(data,function(i,item){
 
-								$("#studentsTable tbody").append('<tr><td><center> '+item.Name_Student+'</center></td><td><input type="checkbox" class="studentCheckbox" name="student" value="'+item.Id_Student+'"></td></tr>');
+							
+							var tr='';
+							$("#selectedStudentsTable tbody").html('');
+							$.each(data,function(i,item){
+							
+								updateStates(item.Id_Advisor,function(html){
+								$("#selectedStudentsTable tbody").append('<tr><td>'+item.Id_Student+'</td><td><center> '+item.Name_Student+'</center></td><td><select class="form-control"  name="advisor"id="advisor">'+html+'</select></td></tr>');
+								
 							});
+						
+									});
 							
 
 						}
 						
 				
 	});
-	$('#studentsModal').modal('show');
+	
 });
 $("#Id_Dept").change(function(){
 updateStates()
@@ -169,8 +151,9 @@ updateStates()
 
 
 });
-function updateStates() {
+function updateStates(Id_advisor,callback) {
 	var Id_Dept=$("#Id_Dept").val();
+	var vhtml='';
 
 $.ajax({
 	
@@ -180,17 +163,30 @@ $.ajax({
 					dataType:'json',
 					success:function(data)
 					{
+						var vhtml='';
 						var option='';
-					
+					vhtml+='<option value=" " class="advisor"></option>';
 						$.each(data,function(i,item){
-							option+=' <option value="'+item.Id_Advisor+'">'+item.Name_Advisor+'</option>';
+							var check_selected='';
+						
+								
+							if(Id_advisor==item.Id_Advisor)
+							{
+								check_selected='selected';
+							}
+							else{check_selected=' ';}
+							vhtml+=' <option value="'+item.Id_Advisor+'" '+check_selected+' class="advisor">'+item.Name_Advisor+'</option>';
 			
 						});
-						$("#advisor").html(option);
+				
+			callback(vhtml);
 
 					}
+				
 			
 });
+
+
 }
 </script>
 

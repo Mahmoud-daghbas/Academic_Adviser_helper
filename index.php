@@ -17,7 +17,7 @@ $user_sucess=0;
 
      $_SESSION["u_type"]=$row["u_type"];
 		   if($row["u_type"]==1)
-		   header('location:home1.html');
+		   header('location:unit_home.php');
 		 
 				$user_sucess=1;
 			}
