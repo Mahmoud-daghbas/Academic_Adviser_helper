@@ -10,7 +10,7 @@ include 'login/config.php';
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
+	<div class="container"  style="text-align: right;" >
 		<h1> ادارة ايفاد الطلاب </h1>
 		<div class="form-group mb-2 text-right">
 			<label for="Id_Dept" class="control-label">القسم</label>
@@ -101,7 +101,7 @@ j++;
 						type:'POST',
 						data:{add_data_link:true,data:insert},
 						success:function(data){
-					alert("تمت عملية الاضافة بنجاح");
+					alert("تمت حفظ بنجاح");
 						}});
 
 					
