@@ -171,7 +171,7 @@ var row_select='';
 				
 						
 					$.ajax({
-						url:'academic_advisor/ajax_function.php',
+						url:'academic_advisor/Controler_Advisor.php',
 						type:'POST',
 						data:{oper:fun,Id_Advisor:Id_Advisor,Name_Advisor:Name_Advisor,Email_Advisor:Email_Advisor,Phone_Number:Phone_Number,Office_Room:Office_Room,Id_Dept:Id_Dept},
 						success:function(data){
@@ -203,7 +203,7 @@ var row_select='';
                     $('#btn-delete-yes').on('click', function() {
                    // Make AJAX request to delete record from database
 					$.ajax({
-					url: 'academic_advisor/ajax_function.php',
+					url: 'academic_advisor/Controler_Advisor.php',
 					type: 'POST',
 						data:{delete_advisor:true,Id_Advisor:id},
 					success: function(response) {

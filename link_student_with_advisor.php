@@ -26,7 +26,7 @@ include 'login/config.php';
 			انزال بيانات الطلاب
 		</button>
 		<button type="button" class="btn btn-primary"  id="saveStudentsBtn" >
-			خفظ
+			حفظ
 		</button>
 		<hr>
 		<table id="selectedStudentsTable" class="table" style="display:none;">
@@ -38,11 +38,11 @@ include 'login/config.php';
 				</tr>
 			</thead>
 			<tbody>
-				<!-- Selected students will be added dynamically here -->
+			
 			</tbody>
 		</table>
 	</div>
-	<!-- Students Modal -->
+
 
 	<!-- Include jQuery -->
 	<script src="js/js/jquery-3.6.4.min.js"></script>
@@ -92,63 +92,45 @@ j++;
 }
 }
 
-
-// Add table rows to the selected students table
-
-
-					$.ajax({
-						url:'data_link/ajax_function.php',
-						type:'POST',
-						data:{add_data_link:true,data:insert},
-						success:function(data){
-					alert("تمت حفظ بنجاح");
-						}});
-
-					
-				
-// Show the selected students table
+$.ajax({
+	url:'data_link/Controler_Data_link.php',
+	type:'POST',
+	data:{add_data_link:true,data:insert},
+	success:function(data){
+alert("تمت حفظ بنجاح");
+	}});	
 
 // Hide the students modal
 $('#studentsModal').modal('hide');
 });
-
-
 $('#showModelStudent').click(function() {
 
 	var Id_Dept=$('#Id_Dept').val();
 
 	$.ajax({
 		
-						url:'students/ajax_function.php',
-						type:'POST',
-						data:{select_students:true,Id_Dept:Id_Dept},
-						dataType:'json',
-						success:function(data)
-						{
-
-							
-							var tr='';
-							$("#selectedStudentsTable tbody").html('');
-							$.each(data,function(i,item){
-							
-								updateStates(item.Id_Advisor,function(html){
-								$("#selectedStudentsTable tbody").append('<tr><td>'+item.Id_Student+'</td><td><center> '+item.Name_Student+'</center></td><td><select class="form-control"  name="advisor"id="advisor">'+html+'</select></td></tr>');
-								
-							});
-						
-									});
-							
-
-						}
-						
-				
-	});
+			url:'students/Controler_Students.php',
+			type:'POST',
+			data:{select_students:true,Id_Dept:Id_Dept},
+			dataType:'json',
+			success:function(data)
+			{
+				var tr='';
+				$("#selectedStudentsTable tbody").html('');
+				$.each(data,function(i,item)
+				{
+					updateStates(item.Id_Advisor,function(html)
+					{
+					$("#selectedStudentsTable tbody").append('<tr><td>'+item.Id_Student+'</td><td><center> '+item.Name_Student+'</center></td><td><select class="form-control"  name="advisor"id="advisor">'+html+'</select></td></tr>');
+				     });
+				});
+			}		
+	 });
 	
 });
 $("#Id_Dept").change(function(){
 updateStates()
 });
-
 
 });
 function updateStates(Id_advisor,callback) {
@@ -157,33 +139,25 @@ function updateStates(Id_advisor,callback) {
 
 $.ajax({
 	
-					url:'academic_advisor/ajax_function.php',
-					type:'POST',
-					data:{select_advisor:true,Id_Dept:Id_Dept},
-					dataType:'json',
-					success:function(data)
-					{
-						var vhtml='';
-						var option='';
-					vhtml+='<option value=" " class="advisor"></option>';
-						$.each(data,function(i,item){
-							var check_selected='';
-						
-								
-							if(Id_advisor==item.Id_Advisor)
-							{
-								check_selected='selected';
-							}
-							else{check_selected=' ';}
-							vhtml+=' <option value="'+item.Id_Advisor+'" '+check_selected+' class="advisor">'+item.Name_Advisor+'</option>';
-			
-						});
-				
-			callback(vhtml);
-
-					}
-				
-			
+		url:'academic_advisor/Controler_Advisor.php',
+		type:'POST',
+		data:{select_advisor:true,Id_Dept:Id_Dept},
+		dataType:'json',
+		success:function(data)
+		{
+			var vhtml='';
+			var option='';
+		vhtml+='<option value=" " class="advisor"></option>';
+			$.each(data,function(i,item)
+			{
+				var check_selected='';
+				if(Id_advisor==item.Id_Advisor)
+				       {check_selected='selected';}
+				else{check_selected=' ';}
+				vhtml+=' <option value="'+item.Id_Advisor+'" '+check_selected+' class="advisor">'+item.Name_Advisor+'</option>';
+			});
+        callback(vhtml);
+		}		
 });
 
 

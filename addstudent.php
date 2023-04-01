@@ -156,7 +156,7 @@ include 'login/config.php';
 		</script>
 		<script>
 		$(document).ready(function(){
-var row_select='';
+			var row_select;
 			$.ajax({
 					url: 'students/loadstudent.php',
 					type: 'GET',
@@ -193,7 +193,7 @@ var row_select='';
 				
 						
 					$.ajax({
-						url:'students/ajax_function.php',
+						url:'students/Controler_Students.php',
 						type:'POST',
 						data:{oper:fun,id_student:id_student,s_name:s_name,s_gender:s_gender,birth_date:birth_date,phone_no:phone_no,s_email:s_email,id_dept:id_dept,Id_Plan:Id_Plan},
 						success:function(data){
@@ -219,7 +219,7 @@ var row_select='';
 				$('#studentsTable').on('click', '.remove_student', function() {
 			
                       var id = $(this).data('id');
-					  row_select=$(this).closest('tr');
+					 var row_select2=$(this).closest('tr');
                     // Show confirmation dialog
                       $('#confirm-delete').modal('show');
                        // Attach click event handler to Yes button in confirmation dialog
@@ -227,7 +227,7 @@ var row_select='';
                    // Make AJAX request to delete record from database
 
 					$.ajax({
-					url: 'students/ajax_function.php',
+					url: 'students/Controler_Students.php',
 					type: 'POST',
 						data:{delete_student:true,id_student:id},
 					success: function(response) {
@@ -235,10 +235,11 @@ var row_select='';
 						// If deletion is successful, remove row from table
 						if (response==1) {
 							//$(this).closest('tr').remove()
-							row_select.remove();
+							row_select2.remove();
 							
-					
-						}
+							response='';
+						}else alert('لا يمكن حذف الطالب لارتباطة ببيانات اخرى');
+						
 						
 						// Hide confirmation dialog
 						$('#confirm-delete').modal('hide');
@@ -282,7 +283,7 @@ var row_select='';
 		 // Make AJAX request to delete record from database
 
 		  /*$.ajax({
-		  url: 'students/ajax_function.php',
+		  url: 'students/Controler_Students.php',
 		  type: 'POST',
 			  data:{delete_student:true,id_student:id},
 		  success: function(response) {

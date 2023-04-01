@@ -71,6 +71,7 @@ function update_student($s_id,$s_name=NULL,$s_gender=NULL,$birth_date,$phone_no=
 }
 function delete_student($s_id)
 {  global $conn;
+
     $q_delete="DELETE FROM `table_students` WHERE `Id_Student`='$s_id'";
     $query=mysqli_query($conn,$q_delete);
     if(!$query)
@@ -82,6 +83,8 @@ function delete_student($s_id)
     {
         echo '1';
     }
+   
+  
 }
 
 function select_gender($s_id)
@@ -114,6 +117,17 @@ $data[]=$row;
     }
    echo json_encode($data);
   }
+  function select_student_join_advisor_assigment($id_advisor)
+{
+  global $conn;
+   $students =$conn->query("SELECT s.`Id_Student`, `Name_Student`, IF(`Gender_Student`=1,'ذكر', 'انثى') gender,`Date_Birth`, `Phone_Student`, `Email_Student`,  concat(d.`Code_Dept`, d.`Name_Dept` ) as'Name_Dept' FROM `table_students` s inner JOIN table_department d on  s.Id_Dept=d.Id_Dept LEFT join table_links l on l.Id_Student=s.Id_Student   WHERE l.Id_Advisor='$id_advisor' order by Id_Student asc");
+$data=array();
+   while($row=$students->fetch_assoc()){
+$data[]=$row;
+    }
+   echo json_encode($data);
+  }
+
 //delete_student(8888);
 //update_student(12355666,'lgdf', 1, '2022-1-1', '7777666666', 'hhh@gmail.com', 1,2);
 ?>
