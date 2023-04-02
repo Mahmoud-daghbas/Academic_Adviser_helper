@@ -38,7 +38,7 @@
     </style>
 </head>
 <body>
-  
+
         <div class="jumbotron1">
             <div class="d-flex justify-content-between align-items-center">
               <div>
@@ -51,6 +51,9 @@
             </div>
             <hr class="">
           </div>
+     
+    </div>
+
         <div class="side-menu"  style="text-align: right;"  >
             <div class="card mb-3 text-center">
                 <img src="images/logo.png" alt="person" class="img-fluid" style="max-width: 15%; margin: auto;">
@@ -94,6 +97,7 @@
       });
     });
     </script>
+  
    
 </html>
 

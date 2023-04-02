@@ -1,22 +1,10 @@
 <?php
 
 include 'login/config.php';?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title> اضافة مرشد  </title>
-	<!-- Include Bootstrap CSS -->
-	<link href="js/css/bootstrap.min.css" rel="stylesheet">
-    	<!-- Include Bootstrap JS -->
-		<script src="js/js/bootstrap.min.js"></script>
-		<script src="js/bootstrap-datepicker.min.js"></script>
-		
-		<script src="js/js/jquery-3.6.4.min.js"></script>
-</head>
-<body>
 
+<section id="" class="d-flex align-items-center">
+<main id="main">
+<link href="js/css/bootstrap.min.css" rel="stylesheet">
 	<div class="container"  style="text-align: right;" >
 		<h1> قم باضافة مرشد وسيظهر لك في الجدول اسفل  </h1>
 		<button type="button" class="btn btn-primary text-right" onclick="showAddAdvisorModal('اضافة مرشد')">
@@ -114,6 +102,14 @@ include 'login/config.php';?>
 </div>
 
 	</div>
+	</main>
+</section>
+
+    	<!-- Include Bootstrap JS -->
+		<script src="js/js/bootstrap.min.js"></script>
+		<script src="js/bootstrap-datepicker.min.js"></script>
+		
+		<script src="js/js/jquery-3.6.4.min.js"></script>
 		<script>
 		
 		function showAddAdvisorModal($title) {
@@ -146,12 +142,15 @@ var row_select='';
 						// Loop through data and add rows to table
 						$.each(data, function(i, item){
 							$('#advisorsTable tbody').append('<tr><td>' + item.Id_Advisor + '</td><td>' + item.Name_Advisor + '</td><td>' + item.Email_Advisor + '</td><td>' + item.Phone_Number + '</td><td>' + item.Office_Room + '</td><td>' + item.Name_Dept + '</td><td><center><button class="btn btn-sm btn-info edit_advisor mr-2" data-id="'+item.Id_Advisor +'"> تعديل </button><button class="btn btn-sm btn-danger remove_advisor" data-id="'+item.Id_Advisor +'"> حذف </button></center></td></tr>');
+
 						});
+					
 					},
 			
 					error: function(xhr, status, error){
 						console.log(xhr.responseText);
-					}
+					},
+					
 				});
 				
 				$("#saveadvisor").click(function(){
@@ -183,8 +182,11 @@ var row_select='';
 							else{
 									var  tr='<tr><td>' + Id_Advisor + '</td><td>' + Name_Advisor + '</td><td>' + Email_Advisor + '</td><td>' + Phone_Number + '</td><td>' + Office_Room + '</td><td>' + dept_name + '</td><td><center><button class="btn btn-sm btn-info edit_advisor mr-2" data-id="'+Id_Advisor+'"> تعديل </button><button class="btn btn-sm btn-danger remove_advisor" data-id="'+Id_Advisor +'"> حذف </button></center></td></tr>';
 									if(fun=='add_advisor'){
-									$('#advisorsTable tbody').append(tr);}
-									else{row_select.replaceWith(tr);}
+									$('#advisorsTable tbody').append(tr);
+								}
+									else{row_select.replaceWith(tr);
+									
+									}
 									$("#addAdvisorModal").modal("hide");
 						
 								}
@@ -259,5 +261,3 @@ var row_select='';
 
 	</script>
 	
-</body>
-</html>
