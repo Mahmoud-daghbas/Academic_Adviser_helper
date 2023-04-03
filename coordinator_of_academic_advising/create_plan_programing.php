@@ -4,10 +4,13 @@
 <head>
   <title>My Web Page</title>
   <link rel="stylesheet" href="../assest/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css\create_plan_programing.css">
 </head>
 <body dir="rtl">
-  <div id="form">
-    <form>
+   <div class="container ">
+   <div id="form" class="card mt-3">
+   <div class="card body">
+   <form>
       <table style="font_size:16px;">
            <tr> 
              <td>
@@ -36,13 +39,13 @@
               </td>
                 </tr>
                 </table>
-                </form>
-                </div>
-<div id="div_table">
+    </form>
+   </div>
+  </div>
+   </div>
+<div id="div_table" class="container">
 </div>
     <!-- Add more rows here -->
-   
- 
 
   <script src="../assest/js/jquery-3.2.1.slim.min.js"></script>
   <script src="../assest/js/popper.min.js"></script>
@@ -51,42 +54,7 @@
   <script src="../js/bootstrap-datepicker.min.js"></script>
   
   
-<style>
-  .last-row {
-    position: relative;
-  }
-  .floating-action-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: blue;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-  }
-  CSS:
 
-table {
-  font-size: 12px;
-}
-
-table th {
-  font-size: 14px;
-  text-align: center;
-}
-
-table td {
-  font-size: 10px;
-}
- 
-
-  
-</style>
 
 <script>
     $(document).ready(function(){
