@@ -11,7 +11,7 @@
    <div id="form" class="card mt-3">
    <div class="card body">
    <form>
-      <table style="font_size:16px;">
+      <table >
            <tr> 
              <td>
                <div class="form-group mb-2 text-right">
