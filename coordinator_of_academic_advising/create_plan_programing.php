@@ -5,7 +5,6 @@ header("Cache-Control: no-cache, must-revalidate");?>
    <div class="container ">
    <div id="form" class="card mt-3">
    <div class="card body">
-<<<<<<< HEAD
    
    <fieldset>
    <legend>بيانات الخطة</legend>
@@ -18,12 +17,6 @@ header("Cache-Control: no-cache, must-revalidate");?>
 						    </div>
             
            
-=======
-   <form>
-      <table >
-           <tr> 
-             <td>
->>>>>>> 15c8bba3fdd6113fc77c1a32947488922b3e5961
                <div class="form-group mb-2 text-right">
                       <label for="Name_Plan">اسم الخطة:</label>
                       <input type="text" class="form-control" id="Name_Plan" name="Name_Plan" required>
