@@ -18,7 +18,10 @@ $user_sucess=0;
      $_SESSION["u_type"]=$row["u_type"];
 		   if($row["u_type"]==1)
 		   header('location:unit_home.php');
-		 
+		 else if($row["u_type"]==2)
+     {
+      header('location:coordinator_home.php');
+     }
 				$user_sucess=1;
 			}
 			

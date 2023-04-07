@@ -8,15 +8,13 @@ include 'login/config.php';?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title> اضافة المستويات  </title>
 	<!-- Include Bootstrap CSS -->
-	<link href="js/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/js/bootstrap.min.js"></script>
+
 </head>
 <body dir="rtl">
 
 <div class="container"  style="text-align: right;" >
-		<h1> قم باضافةمادةوسيظهر لك في الجدول اسفل  </h1>
-		<button type="button" class="btn btn-primary text-right" onclick="showAddlevelModal('اضافة مادة')">اضافة
+	
+		<button type="button" class="btn btn-primary text-right" onclick="showAddlevelModal('اضافة مستوى')">اضافة
 		</button>
 		
 		<!-- Modal -->
@@ -48,21 +46,23 @@ include 'login/config.php';?>
 			</div>
 		</div>
 </div >
-		<hr>
 		
+		<div style="height: 300px; overflow-y: scroll;">
 		<table id="levelTable" class="table "style="text-align: center;"  dir="rtl"  >
 			<thead >
 				<tr>
-					<th > اسم المستوى </th>
+					<th style="position: sticky; top: 0; background-color: #fff"> اسم المستوى </th>
 				
-					<th>الاجراء</th>
+					<th style="position: sticky; top: 0; background-color: #fff;">الاجراء</th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				<!-- level will be added  here -->
 			</tbody>
+			
 		</table>
-
+</div>
 		<!-- Modal dialog box for confirmation -->
 <div class="modal" id="confirm-delete">
   <div class="modal-dialog">
@@ -86,7 +86,7 @@ include 'login/config.php';?>
 		function showAddlevelModal($title) {
 			
 			$('#addlevelModal .modal-title').html($title);
-			if($title=="اضافة مادة"){
+			if($title=="اضافة مستوى"){
 			
               
                 $('#Name_Level').val('');
@@ -127,7 +127,7 @@ var row_select='';
 load_levels();
 				$("#savelevel").click(function(){
 					var fun ='add_Level';
-					if($('#addlevelModal .modal-title').text()!='اضافة مادة')
+					if($('#addlevelModal .modal-title').text()!='اضافة مستوى')
 					fun ='update_Level';
 					var Name_Level=$('#Name_Level').val();
 					var Id_level=$('#addlevelModalLabel').val();

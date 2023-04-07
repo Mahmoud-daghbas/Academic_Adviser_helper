@@ -45,6 +45,6 @@
     .form-control.smaller {
         font-size: 70%;
         padding: 0.375rem 0.75rem;
-        margin: 50px;
+      
     }
 </style>

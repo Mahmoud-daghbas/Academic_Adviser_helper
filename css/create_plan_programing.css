@@ -64,8 +64,19 @@
 .centered-form .form-container {
     width: 50%;
 }
+
+fieldset {
+  display: flex;
+  flex-direction: row;
+ border: 3px;
+}
+label, input {
+  display: inline-block;
+}
+
 @media screen and (max-width: 768px) {
     .centered-form .form-container {
         width: 80%;
     }
 }
+

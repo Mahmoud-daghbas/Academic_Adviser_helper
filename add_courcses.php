@@ -1,19 +1,8 @@
 <?php
 
 include 'login/config.php';?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title> اضافة المواد  </title>
-	<!-- Include Bootstrap CSS -->
-	<link href="js/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="js/js/bootstrap.min.js"></script>
-</head>
-<body dir="rtl">
-
+<section id="" class="d-flex align-items-center">
+<main id="main">
 <div class="container"  style="text-align: right;" >
 		<h1> قم باضافةمادةوسيظهر لك في الجدول اسفل  </h1>
 		<button type="button" class="btn btn-primary text-right" onclick="showAddCoursesModal('اضافة مادة')">اضافة
@@ -65,23 +54,23 @@ include 'login/config.php';?>
 		</div>
 </div >
 		<hr>
-		
-		<table id="CoursesTable" class="table "style="text-align: center;"  dir="rtl"  >
+		<div style="height: 300px; overflow-y: scroll;">
+		<table id="CoursesTable" class="table "style="text-align: center "  dir="rtl"  >
 			<thead>
 				<tr>
-				<th> كود المادة</th>
-					<th> اسم المادة </th>
-					<th>الساعات المعتمدة</th>
-					<th>وصف المادة </th>
+				    <th style="position: sticky; top: 0; background-color: #fff;"> كود المادة</th>
+					<th style="position: sticky; top: 0; background-color: #fff;"> اسم المادة </th>
+					<th style="position: sticky; top: 0; background-color: #fff;">الساعات المعتمدة</th>
+					<th style="position: sticky; top: 0; background-color: #fff;">وصف المادة </th>
 				
-					<th>الاجراء</th>
+					<th style="position: sticky; top: 0; background-color: #fff;">الاجراء</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- Courses will be added  here -->
 			</tbody>
 		</table>
-
+</div>
 		<!-- Modal dialog box for confirmation -->
 <div class="modal" id="confirm-delete">
   <div class="modal-dialog">
@@ -101,6 +90,8 @@ include 'login/config.php';?>
     </div>
   </div>
 </div>
+</main>
+</section>
 		<script>
 		function showAddCoursesModal($title) {
 			
@@ -238,5 +229,3 @@ load_coursess();
 
 	</script>
 	
-</body>
-</html>
