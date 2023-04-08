@@ -41,6 +41,7 @@ header("Cache-Control: no-cache, must-revalidate");?>
               </div>
               <button class=" w-30 h-50 float-right ml-2 btn btn-primary" id="save_plan" style="margin-top: 2rem;"><i class="fa fa-save"></i> حفظ</button>
               <button class="w-30 h-50 float-right  mr-2 rem btn btn-primary" id="select_plan"style="margin-top: 2rem;"><i class="fa fa-select"></i> استيراد بيانات الخطة من خطة سابقة</button>
+              <button class="w-30 h-50 float-right  mr-2 rem btn btn-primary" id="share_plan"style="margin-top: 2rem;"><i class="fa fa"></i> مشاركة الخطة</button>
       
                 </fieldset>
              
@@ -196,6 +197,16 @@ $('#btn-import-yes').click(function()
   $('#data_plan').modal('hide');
   load_plan('coordinator_of_academic_advising/load_plan_programing_after_created.php?Id_plan='+id_plan);
 
+});
+
+$('#share_plan').click(function(){
+  alert('sucess');
+ var ContenUrl='academic_advisor/Controler_Advisor.php';
+  var array_data=$('#Id_Dept').val();
+  tag_controler='select_advisor';
+  select(ContenUrl,tag_controler,array_data);
+  $('#advisorModal').modal('show');
+  
 })
     });
 </script>

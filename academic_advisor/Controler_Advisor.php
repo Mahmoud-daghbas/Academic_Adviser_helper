@@ -37,4 +37,10 @@ if (isset($_POST['select_advisor']))
   $Id_Dept=$_POST['Id_Dept'];
   select_advisor_in_deptAssigment($Id_Dept);
 }
+if (isset($_POST['oper']) && $_POST['oper']=='select_advisor' ) 
+{
+ $data= $_POST['data'];
+  $Id_Dept=$data;
+  select_advisor_in_deptAssigment($Id_Dept);
+}
 ?>
