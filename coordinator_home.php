@@ -37,6 +37,40 @@
     .list-group-item.active {
       float: right;
     }
+    /* اضافة ازرار فرعية للازرار الرئيسية */
+    .sub-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-group-item.active + .sub-menu {
+  display: block;
+}
+
+.sub-menu li a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.sub-menu li a:hover {
+  background-color: #f5f5f5;
+}
+.list-group1{
+  padding: 10px;
+  background-color: blue;
+  color: white;
+}
+.list-group1:hover{
+  background-color: lightblue;
+  color:black;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -65,8 +99,12 @@
             <a href="#" class="list-group-item list-group-item-action" data-content="add_courcses.php"> ادارة المواد </a>
                 <a href="#" class="list-group-item list-group-item-action" data-content="add_levels.php"> ادارة المستويات</a>
               
-                <a href="#" class="list-group-item list-group-item-action" data-content="coordinator_of_academic_advising/create_plan_programing.php"> انشاء خطة  جديدة </a>
-                <a href="#" class="list-group-item list-group-item-action" data-content="coordinator_of_academic_advising/update_plan_programing.php"> تعديل خطة </a>
+                <a href="#" class="list-group1 list-group-item-action" id="sub-menu-toggle">تعديل خطة</a>
+                <ul class="sub-menu" style="display:none" >
+                  <li> <a href="#" class="list-group-item list-group-item-action" data-content="coordinator_of_academic_advising/update_plan_programing.php" id="sub-menu-toggle"> خيار واحد </a></li>
+                  <li> <a href="#" class="list-group-item list-group-item-action" data-content="coordinator_of_academic_advising/update_plan_programing.php" id="sub-menu-toggle"> خيار اثنين </a></li>
+                </ul>
+
                 <a href="#" class="list-group-item list-group-item-action" data-content="coordinator_of_academic_advising/load_plan_and_deatails.php"> عرض الخطط</a>
          
             </div>
@@ -191,10 +229,21 @@ $.ajax({
           
       
 });
-
-
-
         }
+
+        // اسكريبت اظهار واخفاء الازرار الفرعية
+        $(document).ready(function() {
+          var menuVisible = false;
+          $('#sub-menu-toggle').click(function() {
+            if (menuVisible) {
+              $('.sub-menu').hide();
+              menuVisible = false;
+            } else {
+              $('.sub-menu').show();
+              menuVisible = true;
+            }
+          });
+        });
       </script>
    
 </html>
